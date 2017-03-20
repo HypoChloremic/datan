@@ -1,16 +1,30 @@
-import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
-import matplotlib.pyplot as plt
 from matplotlib.figure import Figure 
+import matplotlib.pyplot as plt
+import numpy as np
+import tkinter as tk
 
 class graph:
-	def __init__(self, master=None, **kw):
+	def __init__(self, master=None, data=None):
 	# Frame
 	# Matplotlib
 		# Figure
+		data = data
+		print(len(data))
+		x = []
+		y = []
+		for k in range(1, len(data)):
+			x.append(k)
+			y.append(float(data[k][1]))
+			print(data[k][1])
+		
+		x = np.array(x, float)
+		y = np.array(y, float)
+
+
 		f = Figure(figsize=(6, 7.5))
 		a = f.add_subplot(111)
-
+		a.plot(x, y)
 		# Canvas
 		canvas = FigureCanvasTkAgg(f, master=master)
 		canvas.show()
