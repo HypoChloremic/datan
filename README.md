@@ -1,4 +1,4 @@
-# GoogleFinanceAPI
+# Datan
 Tinkering with GoogleFinance
 
 A gui app revolving around the grabbing of data from Google Finance. 
