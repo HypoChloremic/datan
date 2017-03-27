@@ -25,14 +25,14 @@ class googlefinance:
 		# We name the graph frame self.graph, such that we can parse it into the matwidget function
 		# which in turn paints the matplotlib canvas in the given frame. 
 		self.graph = builder.get_object("graph")
-		self.data()
+		self.reqdata()
 		matwidget.graph(self.graph, self.data)
 	
 	def urls(self):
 		# TODO
 		pass
 			
-	def data(self):
+	def reqdata(self):
 		self.yahoo = 'http://ichart.finance.yahoo.com/table.csv?s=AAPL&c=1962'
 		with requests.Session() as s:
 			download = s.get(self.yahoo)
