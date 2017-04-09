@@ -1,47 +1,171 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface>
-  <object class="ttk.Frame" id="root">
-    <property name="height">800</property>
-    <property name="width">1200</property>
-    <layout>
-      <property name="column">0</property>
-      <property name="columnspan">2</property>
-      <property name="propagate">False</property>
-      <property name="row">0</property>
-    </layout>
+  <object class="tk.Toplevel" id="Toplevel_1">
+    <property name="height">200</property>
+    <property name="width">200</property>
     <child>
-      <object class="tk.Frame" id="graph">
-        <property name="background">gray</property>
+      <object class="ttk.Frame" id="root">
         <property name="height">800</property>
-        <property name="width">600</property>
+        <property name="width">1200</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">100</property>
           <property name="propagate">False</property>
           <property name="row">0</property>
           <property name="rowspan">100</property>
+          <rows>
+            <row id="0">
+              <property name="weight">0</property>
+            </row>
+          </rows>
+          <columns>
+            <column id="0">
+              <property name="weight">0</property>
+            </column>
+            <column id="1">
+              <property name="weight">0</property>
+            </column>
+            <column id="48">
+              <property name="weight">0</property>
+            </column>
+            <column id="49">
+              <property name="weight">0</property>
+            </column>
+          </columns>
         </layout>
         <child>
-          <object class="ttk.Entry" id="Entry_1">
-            <property name="text" translatable="yes">Entry_1</property>
+          <object class="tk.Frame" id="Graph">
+            <property name="height">200</property>
+            <property name="width">200</property>
             <layout>
               <property name="column">0</property>
+              <property name="columnspan">50</property>
               <property name="propagate">True</property>
               <property name="row">0</property>
+              <property name="rowspan">50</property>
+              <rows>
+                <row id="0">
+                  <property name="weight">0</property>
+                </row>
+              </rows>
+              <columns>
+                <column id="0">
+                  <property name="weight">0</property>
+                </column>
+              </columns>
             </layout>
+            <child>
+              <object class="tk.Frame" id="graph">
+                <property name="background">#ffffff</property>
+                <property name="height">800</property>
+                <property name="width">600</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="columnspan">50</property>
+                  <property name="propagate">False</property>
+                  <property name="row">0</property>
+                  <property name="rowspan">50</property>
+                  <rows>
+                    <row id="0">
+                      <property name="weight">1</property>
+                    </row>
+                  </rows>
+                  <columns>
+                    <column id="0">
+                      <property name="weight">1</property>
+                    </column>
+                  </columns>
+                </layout>
+              </object>
+            </child>
           </object>
         </child>
-      </object>
-    </child>
-    <child>
-      <object class="tk.Frame" id="widgets">
-        <property name="background">#41be6c</property>
-        <property name="height">800</property>
-        <property name="width">600</property>
-        <layout>
-          <property name="column">1</property>
-          <property name="propagate">False</property>
-          <property name="row">0</property>
-        </layout>
+        <child>
+          <object class="tk.Frame" id="mainframe">
+            <property name="background">#000040</property>
+            <property name="height">800</property>
+            <property name="padx">3</property>
+            <property name="pady">4</property>
+            <property name="width">600</property>
+            <layout>
+              <property name="column">50</property>
+              <property name="columnspan">50</property>
+              <property name="propagate">False</property>
+              <property name="row">0</property>
+              <property name="rowspan">50</property>
+              <rows>
+                <row id="0">
+                  <property name="minsize">0</property>
+                  <property name="pad">0</property>
+                  <property name="weight">0</property>
+                </row>
+                <row id="1">
+                  <property name="weight">0</property>
+                </row>
+                <row id="2">
+                  <property name="weight">0</property>
+                </row>
+              </rows>
+              <columns>
+                <column id="0">
+                  <property name="weight">0</property>
+                </column>
+                <column id="1">
+                  <property name="pad">0</property>
+                  <property name="weight">0</property>
+                </column>
+              </columns>
+            </layout>
+            <child>
+              <object class="pygubu.builder.widgets.pathchooserinput" id="pathchooserinput1">
+                <property name="type">file</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="ipadx">100</property>
+                  <property name="ipady">12</property>
+                  <property name="propagate">False</property>
+                  <property name="row">0</property>
+                  <property name="sticky">ne</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Frame" id="Frame_2">
+                <property name="height">200</property>
+                <property name="width">200</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="Button_2">
+                <property name="image">1.png</property>
+                <property name="text" translatable="yes">Mugabe</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="propagate">True</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="Button_1">
+                <property name="image">1.png</property>
+                <property name="text" translatable="yes">Button_1</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="ipadx">0</property>
+                  <property name="ipady">0</property>
+                  <property name="propagate">False</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </object>
