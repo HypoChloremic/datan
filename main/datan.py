@@ -148,9 +148,9 @@ class Datan:
 		# but we had to draw it via canvas
 		self.a.plot(x,y)
 		self.canvas.draw()
-		self.updateInfo(portfolio=self.portfolio)
+		self.update_info(portfolio=self.portfolio)
 
-	def updateInfo(self, portfolio=False):
+	def update_info(self, portfolio=False):
 		# This will update the infobox
 		# Here the portfolio condition is pretty important, as it is everywhere to be honest
 		if portfolio is True:
