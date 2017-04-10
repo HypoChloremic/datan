@@ -3,11 +3,7 @@
 # Edited by Ali Rassolie
 
 #What to import from numpy.
-from numpy import array
-from numpy import transpose
-from numpy import dot
-from numpy import linalg
-from numpy import power
+from numpy import array, transpose, dot, linalg, power
 
 #We want to find the best fitting polynomial of any order (that you choose)
 #between a set of point in the XY plane.

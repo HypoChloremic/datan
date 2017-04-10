@@ -27,7 +27,13 @@ class Datan:
 		
 		
 	# Widgets
-		
+		## Labels
+		self.l1 = builder.get_object("Label_1")
+		self.l2 = builder.get_object("Label_2")
+		self.l3 = builder.get_object("Label_3")
+		# configuring labels
+		self.infobox = ""
+
 		## Buttons
 		self.b1 = builder.get_object("Button_1")
 		self.b2 = builder.get_object("Button_2")
@@ -35,7 +41,7 @@ class Datan:
 		self.b1.config(command=self.button_1)	
 		self.b2.config(command=self.button_2)
 		
-		## Listboxes
+		## Comboboxes
 		self.cb1 = builder.get_object("cb1")
 		# configuring the comboboxes
 		self.cb1.configure(state="readonly")
@@ -66,14 +72,42 @@ class Datan:
 		self.canvas._tkcanvas.grid(column=0, row=1)
 		toolbar.grid(column=0, row=2)
 	
+	# File dialog options
+		# define options for opening or saving a file
+		self.file_opt = options = {}
+		options['defaultextension'] = '.txt'
+		options['filetypes'] = [('all files', '.*'), ('text files', '.txt')]
+		options['initialdir'] = 'C:\\Users\\Ali Rassolie\\OneDrive\\prwork\\python\\programs\\datan\\main'
+		options['parent'] = self.master
+		options['title'] = 'This is a title'
+
 
 	def urls(self):
 		# TODO
 		pass
 
 	def button_1(self):
-		self.draw()
+		# This opens a dialog option, so as to allow user to select file
+		fileName = tk.filedialog.askopenfile(**self.file_opt)
 	
+		# fileName is already an opened file; which implies that we can read write already
+		# We want to split the string, and make an accessible list by index
+		content = fileName.read().split()
+		
+		# As we will have to handle the api differently if we have several companies in the portfolio, 
+		# we will need to differentiate between one selected company and several. 
+		if len(content) > 1:
+			self.portfolio = True
+			self.draw(portfolio=True)
+		
+		elif len(content) == 1:
+		# Having completed the selection process, we can go onto drawing it
+			self.fileCompany = content[0]
+			self.portfolio = False
+			self.draw(portfolio=False)
+		else: 
+			raise Exception("The portfolio did not work outS")
+
 
 	def button_2(self):
 		algoIndex = self.cb1.current()
@@ -88,17 +122,22 @@ class Datan:
 			self.a2.plot(solutionArray)
 			self.canvas.show()
 		
-	def data(self):
-		self.yahoo = 'http://ichart.finance.yahoo.com/table.csv?s=AAPL&c=1962'
-		with requests.Session() as s:
-			download = s.get(self.yahoo)
-			decoded_content = download.content.decode('utf-8')
-			cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-			return list(cr)
+	def data(self, portfolio=False):
+		if portfolio is False:
+			company = self.fileCompany
+			self.yahoo = 'http://ichart.finance.yahoo.com/table.csv?s=%s&c=1962' % company
+			with requests.Session() as s:
+				download = s.get(self.yahoo)
+				decoded_content = download.content.decode('utf-8')
+				cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+				return list(cr)
+		else: 
+			# Todo
+			pass
 
-	def draw(self):
+	def draw(self, portfolio=False):
 		# This is some intuitive stuff; we are visualizing the data
-		data = self.data()
+		data = self.data(portfolio=portfolio)
 		self.x = [float(z) for z in range(1,len(data))]
 		self.y = [float(data[z][1]) for z in range(1,len(data))]
 		
@@ -109,7 +148,18 @@ class Datan:
 		# but we had to draw it via canvas
 		self.a.plot(x,y)
 		self.canvas.draw()
+		self.updateInfo(portfolio=self.portfolio)
 
+	def updateInfo(self, portfolio=False):
+		# This will update the infobox
+		# Here the portfolio condition is pretty important, as it is everywhere to be honest
+		if portfolio is True:
+			pass
+		elif:
+			self.infobox = self.infobox + "\nCompany Name: %s" % self.fileCompany 
+			self.l3.config(text=self.infobox)
+		else:
+			raise Exception("Infobox issue it seems; might be associated with the portfolio condition")
 if __name__ == '__main__':
 	root = tk.Tk()
 	app = Datan(root)
