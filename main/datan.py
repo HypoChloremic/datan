@@ -2,11 +2,10 @@
 # Analyzes stock information, for investment opportunities and general maintenance
 # of user defined portfolios. 
 # by Ali Rassolie
-
+# Tesed with Python 3.5.2
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure 
-# from os.path import abspath
 import requests, csv, pygubu, algo
 import matplotlib.pyplot as plt
 import numpy as np
@@ -97,30 +96,34 @@ class Datan:
 		# As we will have to handle the api differently if we have several companies in the portfolio, 
 		# we will need to differentiate between one selected company and several. 
 		if len(content) > 1:
-			self.portfolio = True
+			self.portfolio = True # This is necessary for the methods that use it as a condition
 			self.draw(portfolio=True)
 		
 		elif len(content) == 1:
-		# Having completed the selection process, we can go onto drawing it
-			self.fileCompany = content[0]
+		# With only one selected company, continue by running the draw method with portfolio as false. 
+			self.fileCompany = content[0] # This points to the first company entry
 			self.portfolio = False
 			self.draw(portfolio=False)
 		else: 
-			raise Exception("The portfolio did not work outS")
+			raise Exception("The portfolio did not work out")
 
 
 	def button_2(self):
+		# This will be looking up the index for the current algorithm function in the algorithm list
 		algoIndex = self.cb1.current()
 		self.algo(algoIndex)
 
 	def algo(self, index=None):
 		# This is a makeshift solution, a more attractive one will be considered later
+		# The index to the company list is being used
+		self.a.cla() # This clears subplot a. This may not be absolutely necessary, but provides a neat way of cleaning the canvas.
 		if index==0:
+			# These are the configurations necessary to run the leastSquares algo
 			solutionArray = self.comboBoxEntryFunctions[0](self, x=self.x,y=self.y, order=1)
-			# This clears subplot a and shows subplot a2 instead. 
-			self.a.cla()
 			self.a2.plot(solutionArray)
 			self.canvas.show()
+		else:
+			raise Exception("An issue with the algorithm indices")
 		
 	def data(self, portfolio=False):
 		if portfolio is False:
@@ -137,7 +140,7 @@ class Datan:
 
 	def draw(self, portfolio=False):
 		# This is some intuitive stuff; we are visualizing the data
-		data = self.data(portfolio=portfolio)
+		data = data(self, portfolio=portfolio)
 		self.x = [float(z) for z in range(1,len(data))]
 		self.y = [float(data[z][1]) for z in range(1,len(data))]
 		
@@ -155,11 +158,13 @@ class Datan:
 		# Here the portfolio condition is pretty important, as it is everywhere to be honest
 		if portfolio is True:
 			pass
-		elif:
+		elif portfolio is False:
 			self.infobox = self.infobox + "\nCompany Name: %s" % self.fileCompany 
 			self.l3.config(text=self.infobox)
 		else:
 			raise Exception("Infobox issue it seems; might be associated with the portfolio condition")
+
+
 if __name__ == '__main__':
 	root = tk.Tk()
 	app = Datan(root)

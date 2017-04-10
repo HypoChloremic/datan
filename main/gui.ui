@@ -169,15 +169,42 @@
             </child>
             <child>
               <object class="tk.Label" id="Label_3">
+                <property name="background">#47809e</property>
                 <property name="height">50</property>
                 <property name="height">50</property>
+                <property name="pady">0</property>
+                <property name="relief">sunken</property>
+                <property name="text" translatable="yes">No portfolio selected</property>
                 <property name="width">50</property>
                 <layout>
                   <property name="column">2</property>
                   <property name="columnspan">20</property>
                   <property name="propagate">True</property>
-                  <property name="row">0</property>
+                  <property name="row">1</property>
                   <property name="rowspan">50</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="Label_4">
+                <property name="text" translatable="yes">If you wish to add
+algorithms, refer to
+algo.py</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="Label_5">
+                <property name="text" translatable="yes">Portfolio Data</property>
+                <layout>
+                  <property name="column">2</property>
+                  <property name="columnspan">20</property>
+                  <property name="propagate">True</property>
+                  <property name="row">0</property>
                 </layout>
               </object>
             </child>
