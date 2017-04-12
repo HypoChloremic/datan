@@ -6,15 +6,16 @@
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure 
-import requests, csv, pygubu, algo
+from dataHandler import DataHandler
+import pygubu, algo
 import matplotlib.pyplot as plt
 import numpy as np
 import tkinter as tk
 import urllib.request as re
 
-class Datan:
+class Datan(DataHandler):
 
-	def __init__(self, master):
+	def __init__(self, master=None):
 		# Root definition
 		self.master = master # De facto self.root
 		self.builder = builder = pygubu.Builder() # This is required to pull the different objects
@@ -36,17 +37,28 @@ class Datan:
 		## Buttons
 		self.b1 = builder.get_object("Button_1")
 		self.b2 = builder.get_object("Button_2")
+		self.b3 = builder.get_object("Button_3")
 		# configuring the buttons
 		self.b1.config(command=self.button_1)	
 		self.b2.config(command=self.button_2)
+		self.b3.config(command=self.button_3)
 		
 		## Comboboxes
 		self.cb1 = builder.get_object("cb1")
+		self.cb2 = builder.get_object("cb2")
 		# configuring the comboboxes
 		self.cb1.configure(state="readonly")
 		self.comboBoxEntry = ["leastSquares", "Mugabeh"]
 		self.comboBoxEntryFunctions = [algo.Algo.leastSquares]
 		self.cb1["values"] = self.comboBoxEntry
+
+		self.cb2.configure(state="readonly")
+		self.comboBoxEntry_2 = ["30d", "60d", "120d", "1y", "3y", "5y"]
+		self.cb2["values"] = self.comboBoxEntry_2
+
+		## Entry
+		self.e1 = builder.get_object("Entry_1")
+		self.e2 = builder.get_object("Entry_2") 
 
 	# Frame
 	# Matplotlib
@@ -62,13 +74,12 @@ class Datan:
 		
 		# Canvas
 		self.canvas = FigureCanvasTkAgg(self.f, master=master)
-		# canvas.show()
 		self.canvas.get_tk_widget().grid(column=0, columnspan=30, row=0)
+		self.canvas._tkcanvas.grid(column=0, row=1)
 
 		# Toolbar
 		toolbar = NavigationToolbar2TkAgg(self.canvas, master)
 		toolbar.update()
-		self.canvas._tkcanvas.grid(column=0, row=1)
 		toolbar.grid(column=0, row=2)
 	
 	# File dialog options
@@ -79,11 +90,6 @@ class Datan:
 		options['initialdir'] = 'C:\\Users\\Ali Rassolie\\OneDrive\\prwork\\python\\programs\\datan\\main'
 		options['parent'] = self.master
 		options['title'] = 'This is a title'
-
-
-	def urls(self):
-		# TODO
-		pass
 
 	def button_1(self):
 		# This opens a dialog option, so as to allow user to select file
@@ -111,9 +117,12 @@ class Datan:
 	def button_2(self):
 		# This will be looking up the index for the current algorithm function in the algorithm list
 		algoIndex = self.cb1.current()
-		self.algo(algoIndex)
+		self.algo_handler(algoIndex)
 
-	def algo(self, index=None):
+	def button_3(self):
+		pass
+
+	def algo_handler(self, index=None):
 		# This is a makeshift solution, a more attractive one will be considered later
 		# The index to the company list is being used
 		self.a.cla() # This clears subplot a. This may not be absolutely necessary, but provides a neat way of cleaning the canvas.
@@ -125,25 +134,14 @@ class Datan:
 		else:
 			raise Exception("An issue with the algorithm indices")
 		
-	def data(self, portfolio=False):
-		if portfolio is False:
-			company = self.fileCompany
-			self.yahoo = 'http://ichart.finance.yahoo.com/table.csv?s=%s&c=1962' % company
-			with requests.Session() as s:
-				download = s.get(self.yahoo)
-				decoded_content = download.content.decode('utf-8')
-				cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-				return list(cr)
-		else: 
-			# Todo
-			pass
-
 	def draw(self, portfolio=False):
 		# This is some intuitive stuff; we are visualizing the data
-		data = data(self, portfolio=portfolio)
+		# DataHandler.data will return a list which we then can deal with
+		data = DataHandler.data(self, portfolio=portfolio, company=self.fileCompany)
+		
 		self.x = [float(z) for z in range(1,len(data))]
 		self.y = [float(data[z][1]) for z in range(1,len(data))]
-		
+
 		x = np.array(self.x)
 		y = np.array(self.y)
 		
@@ -156,12 +154,18 @@ class Datan:
 	def update_info(self, portfolio=False):
 		# This will update the infobox
 		# Here the portfolio condition is pretty important, as it is everywhere to be honest
-		if portfolio is True:
+		
+		if portfolio is False:
+			self.infobox = self.infobox + "\nCompany Name: %s\nhello world" % self.fileCompany # storing str of the company name for the user 
+			stock_value = self.y
+			stock_value.sort()
+			max_stock_value, min_stock_value = stock_value[-1], stock_value[0]
+			self.infobox = self.infobox + "\nMax: %d\nMin: %d" % (max_stock_value, min_stock_value) # Min Max
+			self.l3.config(text=self.infobox) # presenting the information
+		elif portfolio is True:
 			pass
-		elif portfolio is False:
-			self.infobox = self.infobox + "\nCompany Name: %s" % self.fileCompany 
-			self.l3.config(text=self.infobox)
 		else:
+			assert portfolio
 			raise Exception("Infobox issue it seems; might be associated with the portfolio condition")
 
 
