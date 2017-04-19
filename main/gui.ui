@@ -112,6 +112,7 @@
             </layout>
             <child>
               <object class="ttk.Label" id="Label_1">
+                <property name="background">#a0a0a0</property>
                 <property name="padding">0</property>
                 <property name="text" translatable="yes">Select file</property>
                 <property name="width">27</property>
@@ -137,6 +138,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="Label_2">
+                <property name="background">#a0a0a0</property>
                 <property name="text" translatable="yes">Choose algorithm</property>
                 <layout>
                   <property name="column">0</property>
@@ -186,18 +188,8 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Label" id="Label_5">
-                <property name="text" translatable="yes">Portfolio Data</property>
-                <layout>
-                  <property name="column">2</property>
-                  <property name="columnspan">20</property>
-                  <property name="propagate">True</property>
-                  <property name="row">0</property>
-                </layout>
-              </object>
-            </child>
-            <child>
               <object class="tk.Label" id="Label_6">
+                <property name="background">#a0a0a0</property>
                 <property name="text" translatable="yes">Time Frame</property>
                 <property name="width">31</property>
                 <layout>
@@ -226,13 +218,13 @@
                   <property name="column">1</property>
                   <property name="propagate">True</property>
                   <property name="row">5</property>
-                  <property name="sticky">e</property>
                 </layout>
               </object>
             </child>
             <child>
               <object class="tk.Entry" id="Entry_1">
                 <property name="text" translatable="yes">From</property>
+                <property name="width">12</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="propagate">True</property>
@@ -243,10 +235,106 @@
             <child>
               <object class="tk.Entry" id="Entry_2">
                 <property name="text" translatable="yes">To</property>
+                <property name="width">11</property>
                 <layout>
                   <property name="column">1</property>
                   <property name="propagate">True</property>
                   <property name="row">6</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Label" id="Label_4">
+                <property name="background">#a0a0a0</property>
+                <property name="text" translatable="yes">Arguments</property>
+                <property name="width">37</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="columnspan">2</property>
+                  <property name="propagate">True</property>
+                  <property name="row">7</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Combobox" id="cb3">
+                <layout>
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">8</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="Button_4">
+                <property name="text" translatable="yes">Apply</property>
+                <property name="width">6</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="propagate">True</property>
+                  <property name="row">8</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="save">
+                <property name="text" translatable="yes">Save</property>
+                <property name="width">7</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="propagate">True</property>
+                  <property name="row">50</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Label" id="Label_5">
+                <property name="background">#a0a0a0</property>
+                <property name="text" translatable="yes">For the Algorithms</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">13</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Entry" id="Entry_3">
+                <layout>
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">14</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Entry" id="Entry_4">
+                <layout>
+                  <property name="column">1</property>
+                  <property name="propagate">True</property>
+                  <property name="row">14</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="Button_5">
+                <property name="text" translatable="yes">Enter</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="propagate">True</property>
+                  <property name="row">13</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="Button_6">
+                <property name="text" translatable="yes">Clear</property>
+                <property name="width">7</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">50</property>
                 </layout>
               </object>
             </child>
